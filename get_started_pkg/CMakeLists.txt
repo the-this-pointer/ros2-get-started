@@ -2,6 +2,10 @@ cmake_minimum_required(VERSION 3.8)
 project(get_started_pkg)
 
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+# Set C++ standard to C++14
+if(NOT CMAKE_CXX_STANDARD)
+  set(CMAKE_CXX_STANDARD 14)
+endif()
 
 if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
   add_compile_options(-Wall -Wextra -Wpedantic)
@@ -12,11 +16,10 @@ find_package(ament_cmake REQUIRED)
 find_package(rclcpp REQUIRED)
 find_package(std_msgs REQUIRED)
 
-add_executable(msg_pub src/msg_pub.cpp)
-ament_target_dependencies(msg_pub rclcpp std_msgs)
+add_executable(msg_cnt_pub src/msg_cnt_pub.cpp)
+ament_target_dependencies(msg_cnt_pub rclcpp std_msgs)
 
-install(TARGETS
-  msg_pub
+install(TARGETS msg_cnt_pub
   DESTINATION lib/${PROJECT_NAME}/
 )
 
