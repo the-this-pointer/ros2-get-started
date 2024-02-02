@@ -15,11 +15,37 @@ endif()
 find_package(ament_cmake REQUIRED)
 find_package(rclcpp REQUIRED)
 find_package(std_msgs REQUIRED)
+find_package(get_started_pkg_interfaces REQUIRED)
 
+# publisher
 add_executable(msg_cnt_pub src/msg_cnt_pub.cpp)
 ament_target_dependencies(msg_cnt_pub rclcpp std_msgs)
 
 install(TARGETS msg_cnt_pub
+  DESTINATION lib/${PROJECT_NAME}/
+)
+
+# subscriber
+add_executable(msg_cnt_sub src/msg_cnt_sub.cpp)
+ament_target_dependencies(msg_cnt_sub rclcpp std_msgs)
+
+install(TARGETS msg_cnt_sub
+  DESTINATION lib/${PROJECT_NAME}/
+)
+
+# add two nums server
+add_executable(add_two_nums_server src/add_two_nums_server.cpp)
+ament_target_dependencies(add_two_nums_server rclcpp get_started_pkg_interfaces)
+
+install(TARGETS add_two_nums_server
+  DESTINATION lib/${PROJECT_NAME}/
+)
+
+# add two nums client
+add_executable(add_two_nums_client src/add_two_nums_client.cpp)
+ament_target_dependencies(add_two_nums_client rclcpp get_started_pkg_interfaces)
+
+install(TARGETS add_two_nums_client
   DESTINATION lib/${PROJECT_NAME}/
 )
 
